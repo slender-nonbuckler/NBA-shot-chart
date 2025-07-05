@@ -15,7 +15,7 @@ These tables are normalized to minimize data redundancy and ensure efficient que
 
 Example shot chart shown below: 
 
-![shot chart](shot_chart_example.jpg)
+![shot chart](shot_chart_example.JPG)
 
 ### 1. Backend Engineering
 
