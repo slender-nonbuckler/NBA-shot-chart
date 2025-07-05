@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ### NBA Shot Location Data
 Database Architecture (Brief Description):
 This project consists of five key tables: Player, Team, Game, PlayerPerformance, and Shot.
