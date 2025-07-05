@@ -1,0 +1,12 @@
+Database Architecture (Brief Description):
+This project consists of five key tables: Player, Team, Game, PlayerPerformance, and Shot.
+
+Player: Stores basic player information, including a unique id and name.
+Team: Contains team details, with fields for the id and name (e.g., "Tune Squad").
+Game: Records each game’s data, including a unique id, the date, and a foreign key referencing the home team. 
+It also stores a reference to the away team.
+PlayerStat: Captures statistics for individual players in each game. It includes foreign keys for 
+both the player and the game, along with various performance metrics such as points, assists, minutes, and more.
+Shot: Tracks each shot taken by a player during a game. It has foreign keys for the associated 
+PlayerStat and stores details such as whether the shot was successful (is_make) and the shot’s coordinates (location_x, location_y).
+These tables are normalized to minimize data redundancy and ensure efficient querying. The relationships between tables (via foreign keys) ensure that game statistics, team data, and player performance can be easily linked and analyzed.

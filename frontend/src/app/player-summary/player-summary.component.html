@@ -1,0 +1,60 @@
+<!-- player-summary.component.html -->
+
+<div>
+    <!-- Input field for Player ID -->
+    <label for="playerId">Enter Player ID:</label>
+    <input type="number" [(ngModel)]="playerId" placeholder="Enter Player ID" />
+  
+    <!-- Button to fetch player data -->
+    <button (click)="fetchPlayerSummary()">Get Player Summary</button>
+  </div>
+  
+  <!-- Display player name -->
+  <div *ngIf="playerSummary">
+    <h2>{{ playerSummary?.name }}</h2>
+  
+    <!-- Loop through games -->
+    <div *ngFor="let game of playerSummary?.games">
+      <h3>Game on {{ game.date }}</h3>
+      <p>Points: {{ game.points }}</p>
+      <p>Assists: {{ game.assists }}</p>
+      <p>Minutes Played: {{ game.minutes }}</p>
+      <p>Rebounds: {{ game.offensiveRebounds + game.defensiveRebounds }}</p>
+      <p>Steals: {{ game.steals }}</p>
+      <p>Blocks: {{ game.blocks }}</p>
+  
+      <!-- Add shots section -->
+       <!-- Visualize the court and shots -->
+    <svg width="500" height="470">
+        <!-- Background image of the court -->
+        <image href="assets/court_diagram.jpg" width="500" height="470"></image>
+        
+        <!-- Loop through shots -->
+      <ng-container *ngFor="let shot of game.shots">
+        <!-- Green Circle for Made Shot -->
+        <circle *ngIf="shot.isMake"
+                [attr.cx]="convertFeetToPixels(shot.locationX) + 250"
+                [attr.cy]="470 - (convertFeetToPixels(shot.locationY) + 40)"
+                [attr.r]="5"
+                [attr.fill]="'green'">
+        </circle>
+
+        <!-- Red X for Missed Shot -->
+        <ng-container *ngIf="!shot.isMake">
+          <!-- First diagonal line of the X -->
+          <line [attr.x1]="convertFeetToPixels(shot.locationX) + 245"
+                [attr.y1]="470 - (convertFeetToPixels(shot.locationY) + 35)"
+                [attr.x2]="convertFeetToPixels(shot.locationX) + 255"
+                [attr.y2]="470 - (convertFeetToPixels(shot.locationY) + 45)"
+                stroke="red" stroke-width="3" />
+          <!-- Second diagonal line of the X -->
+          <line [attr.x1]="convertFeetToPixels(shot.locationX) + 245"
+                [attr.y1]="470 - (convertFeetToPixels(shot.locationY) + 45)"
+                [attr.x2]="convertFeetToPixels(shot.locationX) + 255"
+                [attr.y2]="470 - (convertFeetToPixels(shot.locationY) + 35)"
+                stroke="red" stroke-width="3" />
+        </ng-container>
+      </ng-container>
+    </svg>
+  </div>
+</div>
